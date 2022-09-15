@@ -1,3 +1,9 @@
 import { Tests } from "@prisma/client";
 
-export type ITest = Omit<Tests, 'id'>
+export interface ITest {
+  name: string;
+  pdfUrl: string;
+  category: string;
+  discipline: string;
+  teacher: string;
+}

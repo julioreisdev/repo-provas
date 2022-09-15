@@ -34,7 +34,7 @@ export async function signinService(data: Omit<IAuth, "passwordConfirm">) {
   const token = jwt.sign(
     { id: user.id, email: user.email },
     `${process.env.SECRET}`,
-    { expiresIn: 1800 }
+    { expiresIn: 10000 }
   );
 
   return { token };

@@ -39,7 +39,7 @@ model TeachersDisciplines {
   teacherId Int
   disciplines Disciplines @relation(fields: [disciplineId], references: [id])
   disciplineId Int
-  @@map("teachers_disciplines")
+  @@map("teachersDisciplines")
 }
 
 model Disciplines {

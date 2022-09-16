@@ -16,7 +16,7 @@ export async function addTestServive(data: ITest) {
   const discipline: Disciplines | null = await disciplinesRepository.findByName(
     data.discipline
   );
-  const catedory: Categories | null = await categoriesRepository.findByName(
+  const category: Categories | null = await categoriesRepository.findByName(
     data.category
   );
   const teacher: Teachers | null = await teachersRepositoty.findByName(
@@ -26,7 +26,7 @@ export async function addTestServive(data: ITest) {
   if (!discipline) {
     throw { type: "not_found", message: "Discipline not exist" };
   }
-  if (!catedory) {
+  if (!category) {
     throw { type: "not_found", message: "Category not exist" };
   }
   if (!teacher) {
@@ -49,15 +49,16 @@ export async function addTestServive(data: ITest) {
   const test: Tests = await testsRepository.insert({
     name: data.name,
     pdfUrl: data.pdfUrl,
-    categoryId: catedory.id,
     teacherDisciplineId: teacher.id,
+    categoryId: category.id
   });
 
-  return {test};
+  return { test, discipline, teacher };
 }
 
 export async function findTestesByDisciplineService() {
-  return "testes por disciplina";
+  const result = await testsRepository.findTestsDisciplines();
+  return { results: result };
 }
 
 export async function findTestesByTeacherService() {

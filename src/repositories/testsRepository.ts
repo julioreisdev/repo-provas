@@ -47,11 +47,31 @@ async function findTestsDisciplines() {
   });
 }
 
+async function findTestsTeachers() {
+  return await connection.teachers.findMany({
+    select: {
+      id: true,
+      name: true,
+      teachersDisciplines: {
+        include: {
+          disciplines: true,
+          tests: {
+            include: {
+              category: true
+            }
+          }
+        }
+      }
+    }
+  })
+}
+
 const testsRepository = {
   insert,
   findAllTests,
   findAllTestsByTeacherId,
   findTestsDisciplines,
+  findTestsTeachers
 };
 
 export default testsRepository;

@@ -57,10 +57,11 @@ export async function addTestServive(data: ITest) {
 }
 
 export async function findTestesByDisciplineService() {
-  const result = await testsRepository.findTestsDisciplines();
-  return { results: result };
+  const results = await testsRepository.findTestsDisciplines();
+  return results;
 }
 
 export async function findTestesByTeacherService() {
-  return "testes por professor";
+  const results = await testsRepository.findTestsTeachers()
+  return results;
 }

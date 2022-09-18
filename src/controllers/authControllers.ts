@@ -17,7 +17,7 @@ export async function signup(req: Request, res: Response) {
   const data: IAuth = res.locals.body;
   try {
     const result = await signupSerive(data);
-    return res.send(result);
+    return res.status(201).send(result);
   } catch (error: any) {
     if (error.type === "conflict") return res.status(409).send(error.message);
     if (error.type === "unauthorized") return res.status(401).send(error.message);
